@@ -13,6 +13,10 @@ function App() {
     setColaboradores([...colaboradores,colaborador])
   }
 
+  function deletarColaborador() {
+
+  }
+
   const time = [
     {
       nome:'Fortnite', 
@@ -47,6 +51,7 @@ function App() {
         corPrimaria={time.corPrimaria} 
         corSecundaria={time.corSecundaria}
         colaboradores={colaboradores.filter(colaborador => colaborador.jogo === time.nome)}
+        aoDeletar = {deletarColaborador()}
       />)}
       <Footer/>
 
