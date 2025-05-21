@@ -28,7 +28,6 @@ const Formulario = (props) => {
       nome, cargo, imagem, jogo, id, favorito
     })
     setNome('')
-    setNome('')
     setCargo('')
     setImagem('')
     setJogo('')
