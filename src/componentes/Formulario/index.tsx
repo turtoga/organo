@@ -1,3 +1,4 @@
+import { IColaborador } from "../../interfaces/IColaborador";
 import Botao from "../Botao";
 import Campo from "../Campo";
 import ListaSuspensa from "../listaSuspensa";
@@ -6,20 +7,26 @@ import {useState} from 'react'
 import { v4 as uuidv4 } from "uuid";
 
 
-const Formulario = (props) => {
+interface FormularioProps {
+  aoColaboradorCadastrado: (colaborador: IColaborador) => void
+  cadastrarTime: (time: {nome:string, cor:string}) => void
+  times: string[]
+}
+
+const Formulario = (props: FormularioProps) => {
 
   const [nome, setNome] = useState('')
   const [cargo, setCargo] = useState('')
   const [imagem, setImagem] = useState('')
   const [jogo, setJogo] = useState('') 
   const [id, setID] = useState('') 
-  const [favorito, setFavorito] = useState('') 
+  const [favorito, setFavorito] = useState(false) 
 
   const [nomeTime, setNomeTime] = useState('')
   const [corTime, setCorTime] = useState('')
 
 
-  const aoSalvar = (evento) => {
+  const aoSalvar = (evento:React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault()
     setID(uuidv4())
     setFavorito(false)
@@ -33,7 +40,7 @@ const Formulario = (props) => {
     setJogo('')
   }
 
-  const aoNovoTime = (e) => {
+  const aoNovoTime = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     props.cadastrarTime({nome: nomeTime, cor: corTime})
     setNomeTime('')

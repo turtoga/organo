@@ -2,13 +2,14 @@ import { useState } from 'react';
 import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
-import Footer from './componentes/Footer';
 import { v4 as uuidv4 } from 'uuid';
+import Footer from './componentes/Footer';
+import { IColaborador } from './interfaces/IColaborador';
 
 
 function App() {
 
-  const [colaboradores,setColaboradores] = useState([])
+  const [colaboradores,setColaboradores] = useState<IColaborador[]>([])
 
   const [time, setTime] = useState([
     {
@@ -33,15 +34,15 @@ function App() {
     }
   ])
 
-  const aoNovoColaboradorAdicionado = (colaborador) => {
+  const aoNovoColaboradorAdicionado = (colaborador: IColaborador) => {
     setColaboradores([...colaboradores,colaborador])
   }
 
-  function deletarColaborador(id) {
+  function deletarColaborador(id: string) {
     setColaboradores(colaboradores.filter(colaborador => colaborador.id !== id))
   }
 
-  function mudarCor(cor,id) {
+  function mudarCor(cor:string,id: string) {
     setTime(time.map(time =>{
       if(time.id === id) {
         time.cor = cor
@@ -50,11 +51,11 @@ function App() {
     }))
   }
 
-  function cadastrarTime(novoTime) {
+  function cadastrarTime(novoTime: {nome:string, cor:string}) {
     setTime([...time, {...novoTime, id: uuidv4()}])
   }
 
-  function resolverFavorito(id) {
+  function resolverFavorito(id:string) {
     setColaboradores(colaboradores.map(colaborador =>{
       if(colaborador.id === id) {
         colaborador.favorito = !colaborador.favorito
@@ -66,7 +67,7 @@ function App() {
   return (
     <div className="App">
       
-      <Banner/>
+      <Banner enderecoImagem={"/imagens/banner.png"} textoAlternativo={"Banner principal da página do Organo"}/>
       <Formulario 
         aoColaboradorCadastrado={aoNovoColaboradorAdicionado} 
         times={time.map(time => time.nome)}
