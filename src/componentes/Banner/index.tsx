@@ -1,5 +1,4 @@
 import './banner.css'
-import React from 'react'
 
 interface BannerProps {
   enderecoImagem: string,
